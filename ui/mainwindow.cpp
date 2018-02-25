@@ -66,5 +66,5 @@ void MainWindow::slotTest(){
 }
 
 void MainWindow::on_actionQuit_triggered(){
-    QCoreApplication::quit();
+    QUIT_APPLICATION
 }

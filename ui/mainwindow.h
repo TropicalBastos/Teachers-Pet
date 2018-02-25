@@ -1,5 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#define QUIT_APPLICATION QCoreApplication::quit();
 
 #include <QMainWindow>
 #include <QDebug>
