@@ -24,7 +24,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="AddStudent" name="pushButton">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -102,6 +102,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>AddStudent</class>
+   <extends>QPushButton</extends>
+   <header>ui/addstudent.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
