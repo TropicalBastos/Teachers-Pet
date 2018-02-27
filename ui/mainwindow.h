@@ -31,6 +31,9 @@ private:
     QAction* saveAction;
     QAction* exitAction;
     Ui::MainWindow *ui;
+    void init();
+    void renderMainMenu();
+    void setMenuListeners();
 };
 
 #endif // MAINWINDOW_H

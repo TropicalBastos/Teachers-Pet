@@ -5,38 +5,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    /* Main window setup */
-    ui->setupUi(this);
-    QAction* actionQuit = ui->actionQuit;
-    this->connect(actionQuit, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
-    setWindowTitle("Teacher's Pet");
-    setFixedSize(400, 300);
-    this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
+    //Initialise base GUI
+    init();
+    renderMainMenu();
+    setMenuListeners();
 
-    menu = new QMenu(ui->toolButton);
-    newAction = new QAction(menu);
-    openAction = new QAction(menu);
-    saveAction = new QAction(menu);
-    exitAction = new QAction(menu);
-    newAction->setObjectName("New");
-    openAction->setObjectName("Open");
-    saveAction->setObjectName("Save");
-    exitAction->setObjectName("Exit");
-    newAction->setText("New");
-    openAction->setText("Open");
-    saveAction->setText("Save");
-    exitAction->setText("Exit");
-    menu->addAction(newAction);
-    menu->addAction(openAction);
-    menu->addAction(saveAction);
-    menu->addAction(exitAction);
-    ui->toolButton->setMenu(menu);
-    connect(ui->toolButton, SIGNAL(clicked(bool)), this, SLOT(slotTest()));
-    connect(newAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
-    connect(openAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
-    connect(saveAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
-    connect(exitAction, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
-
+    //Initialise data layer
     appstate::initStudentList();
     appstate::printStudents();
 }
@@ -68,10 +42,49 @@ void MainWindow::slotTest(){
 
 }
 
-std::vector<appstate::STUDENT> MainWindow::getStudents(){
-    return appstate::studentList;
+ /* Main window setup */
+void MainWindow::init(){
+    ui->setupUi(this);
+    QAction* actionQuit = ui->actionQuit;
+    this->connect(actionQuit, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
+    setWindowTitle("Teacher's Pet");
+    setFixedSize(400, 300);
+    this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
+}
+
+void MainWindow::renderMainMenu(){
+    menu = new QMenu(ui->toolButton);
+    newAction = new QAction(menu);
+    openAction = new QAction(menu);
+    saveAction = new QAction(menu);
+    exitAction = new QAction(menu);
+    newAction->setObjectName("New");
+    openAction->setObjectName("Open");
+    saveAction->setObjectName("Save");
+    exitAction->setObjectName("Exit");
+    newAction->setText("New");
+    openAction->setText("Open");
+    saveAction->setText("Save");
+    exitAction->setText("Exit");
+    menu->addAction(newAction);
+    menu->addAction(openAction);
+    menu->addAction(saveAction);
+    menu->addAction(exitAction);
+    ui->toolButton->setMenu(menu);
+}
+
+void MainWindow::setMenuListeners(){
+    connect(ui->toolButton, SIGNAL(clicked(bool)), this, SLOT(slotTest()));
+    connect(newAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
+    connect(openAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
+    connect(saveAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
+    connect(exitAction, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
 }
 
 void MainWindow::on_actionQuit_triggered(){
     QUIT_APPLICATION
+}
+
+std::vector<appstate::STUDENT> MainWindow::getStudents(){
+    return appstate::studentList;
 }
