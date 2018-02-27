@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+/*** STATIC GLOBAL INSTANCE ***
+*Retrieve with getInstance() */
+MainWindow* MainWindow::instance;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -18,6 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+MainWindow* MainWindow::getInstance(){
+    return MainWindow::instance;
 }
 
 void MainWindow::slotTest(){
@@ -50,6 +58,7 @@ void MainWindow::init(){
     setWindowTitle("Teacher's Pet");
     setFixedSize(400, 300);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
+    MainWindow::instance = this;
 }
 
 void MainWindow::renderMainMenu(){
@@ -79,6 +88,11 @@ void MainWindow::setMenuListeners(){
     connect(openAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
     connect(saveAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
     connect(exitAction, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
+}
+
+/** Update UI based on updated data **/
+void MainWindow::updateUi(){
+    std::cout << "UI TO BE UPDATED" << std::endl;
 }
 
 void MainWindow::on_actionQuit_triggered(){

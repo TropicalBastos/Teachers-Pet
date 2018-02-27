@@ -19,6 +19,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     std::vector<appstate::STUDENT> getStudents();
+    void updateUi();
+    static MainWindow* getInstance();
 
 private slots:
     void on_actionQuit_triggered();
@@ -34,6 +36,7 @@ private:
     void init();
     void renderMainMenu();
     void setMenuListeners();
+    static MainWindow* instance;
 };
 
 #endif // MAINWINDOW_H

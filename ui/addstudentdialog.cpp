@@ -52,6 +52,7 @@ void AddStudentDialog::onAddStudentClick(){
     std::cout << studentName << std::endl;
     STUDENT newStudent{studentName, false};
     studentList.push_back(newStudent);
+    MainWindow::getInstance()->updateUi();
     this->close();
 }
 

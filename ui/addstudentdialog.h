@@ -13,6 +13,7 @@
 #include <QSize>
 #include <QPushButton>
 #include "../data/student.h"
+#include "mainwindow.h"
 
 class AddStudentDialog: public QDialog{
 
