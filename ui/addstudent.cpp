@@ -10,7 +10,6 @@ AddStudent::AddStudent(QWidget *parent):
 }
 
 AddStudent::~AddStudent(){
-    delete this->dialog;
     delete this;
 }
 
@@ -21,7 +20,7 @@ void AddStudent::clickListener(){
         delete this->dialog;
     }else{
         this->dialog = new AddStudentDialog(this);
-        this->dialog->setFixedSize(400, 300);
+        this->dialog->setFixedSize(400, 160);
         this->dialog->show();
     }
 }
