@@ -27,12 +27,14 @@ SOURCES += \
     ui/mainwindow.cpp \
     main.cpp \
     ui/addstudent.cpp \
-    ui/addstudentdialog.cpp
+    ui/addstudentdialog.cpp \
+    data/student.cpp
 
 HEADERS += \
     ui/mainwindow.h \
     ui/addstudent.h \
-    ui/addstudentdialog.h
+    ui/addstudentdialog.h \
+    data/student.h
 
 FORMS += \
     ui/mainwindow.ui

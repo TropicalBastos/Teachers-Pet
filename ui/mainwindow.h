@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QDesktopWidget>
+#include "../data/student.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    std::vector<appstate::STUDENT> getStudents();
 
 private slots:
     void on_actionQuit_triggered();

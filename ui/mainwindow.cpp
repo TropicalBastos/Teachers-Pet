@@ -1,4 +1,4 @@
-#include "ui/mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(openAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
     connect(saveAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
     connect(exitAction, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
+
+    appstate::initStudentList();
+    appstate::printStudents();
 }
 
 MainWindow::~MainWindow()
@@ -63,6 +66,10 @@ void MainWindow::slotTest(){
         qDebug() << "Event raised by QAction: " << action->objectName();
     }
 
+}
+
+std::vector<appstate::STUDENT> MainWindow::getStudents(){
+    return appstate::studentList;
 }
 
 void MainWindow::on_actionQuit_triggered(){
