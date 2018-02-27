@@ -99,6 +99,6 @@ void MainWindow::on_actionQuit_triggered(){
     QUIT_APPLICATION
 }
 
-std::vector<appstate::STUDENT> MainWindow::getStudents(){
+std::vector<appstate::STUDENT*> MainWindow::getStudents(){
     return appstate::studentList;
 }

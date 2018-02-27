@@ -7,19 +7,19 @@
  */
 
 //I always forget to redefine extern variables...
-std::vector<appstate::STUDENT> appstate::studentList;
+std::vector<appstate::STUDENT*> appstate::studentList;
 
 void appstate::initStudentList(){
     using namespace appstate;
-    STUDENT student{ UNINITIALIZED, false };
+    STUDENT* student = new STUDENT{ UNINITIALIZED_ID, UNINITIALIZED_NAME, false };
     studentList.push_back(student);
 }
 
 void appstate::printStudents(){
     using namespace std;
     using namespace appstate;
-    for(vector<STUDENT>::iterator it = studentList.begin(); it != studentList.end(); ++it){
-        cout << (*it).name << endl;
+    for(vector<STUDENT*>::iterator it = studentList.begin(); it != studentList.end(); ++it){
+        cout << (*it)->name << endl;
     }
 }
 
@@ -31,4 +31,18 @@ const char* appstate::qstringToCstring(QString string){
     QByteArray byteArray = string.toLatin1();
     const char* byteDataPayload = byteArray.data();
     return byteDataPayload;
+}
+
+/*
+ * Insert a new student into the app's state and
+ * return a reference to that student
+ */
+appstate::STUDENT* appstate::insertStudent(const char* studentName){
+    using namespace appstate;
+    STUDENT* lastStudent = studentList.back();
+    int newId = lastStudent->id + 1;
+    STUDENT* newStudent = new STUDENT{newId, studentName, false};
+    studentList.push_back(newStudent);
+    std::cout << studentName << " inserted into app state" << std::endl;
+    return newStudent;
 }

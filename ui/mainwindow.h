@@ -18,7 +18,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    std::vector<appstate::STUDENT> getStudents();
+    std::vector<appstate::STUDENT*> getStudents();
     void updateUi();
     static MainWindow* getInstance();
 
