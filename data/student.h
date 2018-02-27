@@ -4,6 +4,8 @@
 
 #include <vector>
 #include <iostream>
+#include <QString>
+#include <QByteArray>
 
 /**
  * App state is accessed and initialised to 0 here
@@ -21,6 +23,7 @@ typedef struct studentStruct{
 extern std::vector<STUDENT> studentList;
 void initStudentList();
 void printStudents();
+const char* qstringToCstring(QString string);
 
 }
 

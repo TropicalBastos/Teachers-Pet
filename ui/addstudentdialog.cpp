@@ -1,5 +1,12 @@
 #include "addstudentdialog.h"
 
+/*
+ *
+ * Messy hand coded dialog for adding students
+ * I endorse anyone to contribute and refactor
+ *
+ */
+
 void AddStudentDialog::scaleWidget(QWidget* widget){
     QSize size = widget->size();
     int newWidth = size.width() * SCALE_SIZE;
@@ -19,19 +26,26 @@ AddStudentDialog::AddStudentDialog(QWidget *parent):
     QFont font("Arial", 16);
     studentName->setFont(font);
     studentName->show();
-    QLineEdit* line = new QLineEdit(this);
-    scaleWidget((QWidget*) line);
-    line->show();
+    studentText = new QLineEdit(this);
+    scaleWidget((QWidget*) studentText);
+    studentText->show();
     B_STUDENT_ADJUST
-    positionWidget((QWidget*) line, (QWidget*) studentName);
+    positionWidget((QWidget*) studentText, (QWidget*) studentName);
     B_STUDENT_ADJUST
     studentName->move(studentName->x(), studentName->y() - WIDGET_OFFSET);
 
     //final widget for this view I promise
     QPushButton* addStudent = new QPushButton("Add Student", this);
     scaleWidget((QWidget*) addStudent);
-    positionWidget((QWidget*) addStudent, (QWidget*) line);
+    positionWidget((QWidget*) addStudent, (QWidget*) studentText);
 
+    //attach the listener
+    connect(addStudent, SIGNAL(clicked()), this, SLOT(onAddStudentClick()));
+}
+
+void AddStudentDialog::onAddStudentClick(){
+    const char* studentName = appstate::qstringToCstring(studentText->text());
+    std::cout << studentName << std::endl;
 }
 
 AddStudentDialog::~AddStudentDialog(){

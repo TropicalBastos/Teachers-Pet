@@ -3,7 +3,7 @@
 
 #define SCALE_SIZE 3
 #define WIDGET_OFFSET 10
-#define B_STUDENT_ADJUST studentName->move(line->x(),\
+#define B_STUDENT_ADJUST studentName->move(studentText->x(),\
     studentName->y() + (studentName->height() / 2));
 
 #include <QDialog>
@@ -12,16 +12,23 @@
 #include <QLineEdit>
 #include <QSize>
 #include <QPushButton>
+#include "../data/student.h"
 
 class AddStudentDialog: public QDialog{
+
+    Q_OBJECT
 
 public:
     AddStudentDialog(QWidget* parent);
     ~AddStudentDialog();
 
+public slots:
+    void onAddStudentClick();
+
 private:
     void scaleWidget(QWidget* widget);
     void positionWidget(QWidget* widget, QWidget* prev);
+    QLineEdit* studentText;
 
 };
 

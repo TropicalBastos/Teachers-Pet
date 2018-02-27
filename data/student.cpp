@@ -22,3 +22,13 @@ void appstate::printStudents(){
         cout << (*it).name << endl;
     }
 }
+
+/*
+ * Converts QString and returns a char*:
+ * Much better for serialization
+*/
+const char* appstate::qstringToCstring(QString string){
+    QByteArray byteArray = string.toLatin1();
+    const char* byteDataPayload = byteArray.data();
+    return byteDataPayload;
+}
