@@ -43,9 +43,16 @@ AddStudentDialog::AddStudentDialog(QWidget *parent):
     connect(addStudent, SIGNAL(clicked()), this, SLOT(onAddStudentClick()));
 }
 
+/*
+ * Append students to the global app state vector
+ */
 void AddStudentDialog::onAddStudentClick(){
-    const char* studentName = appstate::qstringToCstring(studentText->text());
+    using namespace appstate;
+    const char* studentName = qstringToCstring(studentText->text());
     std::cout << studentName << std::endl;
+    STUDENT newStudent{studentName, false};
+    studentList.push_back(newStudent);
+    this->close();
 }
 
 AddStudentDialog::~AddStudentDialog(){

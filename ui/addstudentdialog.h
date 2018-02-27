@@ -29,6 +29,7 @@ private:
     void scaleWidget(QWidget* widget);
     void positionWidget(QWidget* widget, QWidget* prev);
     QLineEdit* studentText;
+    QDialog* parent;
 
 };
 
