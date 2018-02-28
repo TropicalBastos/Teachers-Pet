@@ -1,18 +1,18 @@
 #include "dataadapter.h"
 
-DataModel::DataModel(QObject *parent): QAbstractTableModel(parent){
+DataAdapter::DataAdapter(QObject *parent): QAbstractTableModel(parent){
 
 }
 
-int DataModel::rowCount(const QModelIndex &parent) const{
+int DataAdapter::rowCount(const QModelIndex &parent) const{
     return appstate::getStudentCount();
 }
 
-int DataModel::columnCount(const QModelIndex &parent) const{
+int DataAdapter::columnCount(const QModelIndex &parent) const{
     return STUDENT_MEMBERS;
 }
 
-QVariant DataModel::data(const QModelIndex &index, int role) const{
+QVariant DataAdapter::data(const QModelIndex &index, int role) const{
     using namespace appstate;
 
     int row = index.row();
@@ -46,5 +46,17 @@ QVariant DataModel::data(const QModelIndex &index, int role) const{
         }
     }
 
+    return QVariant();
+}
+
+QVariant DataAdapter::headerData(int section, Qt::Orientation orientation, int role) const{
+    switch(role){
+        case Qt::DisplayRole:
+        if(orientation == Qt::Horizontal){
+            if(section == 0) return "Student ID";
+            if(section == 1) return "Name";
+            if(section == 2) return "Paid";
+        }
+    }
     return QVariant();
 }

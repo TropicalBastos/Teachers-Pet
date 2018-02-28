@@ -13,8 +13,8 @@ int main(int argc, char *argv[])
 
     /* Set up main table */
     QTableView tableView(&w);
-    DataModel dm(0);
-    tableView.setModel(&dm);
+    DataAdapter da(0);
+    tableView.setModel(&da);
     tableView.show();
     tableView.setFixedSize(w.width(), w.height() / 2);
     tableView.move(tableView.x(), tableView.y() + 50);
