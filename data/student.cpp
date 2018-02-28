@@ -46,3 +46,7 @@ appstate::STUDENT* appstate::insertStudent(const char* studentName){
     std::cout << studentName << " inserted into app state" << std::endl;
     return newStudent;
 }
+
+int appstate::getStudentCount(){
+    return appstate::studentList.size();
+}

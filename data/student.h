@@ -2,6 +2,7 @@
 #define STUDENT_H
 #define UNINITIALIZED_ID 0
 #define UNINITIALIZED_NAME "$not_initialized$"
+#define STUDENT_MEMBERS 3
 
 #include <vector>
 #include <iostream>
@@ -27,6 +28,7 @@ void initStudentList();
 void printStudents();
 const char* qstringToCstring(QString string);
 STUDENT* insertStudent(const char* studentName);
+int getStudentCount();
 
 }
 

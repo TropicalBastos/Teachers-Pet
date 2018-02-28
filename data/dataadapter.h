@@ -1,7 +1,11 @@
-#ifndef DATAMODEL_H
-#define DATAMODEL_H
+#ifndef DATA_ADAPTER_H
+#define DATA_ADAPTER_H
+#define ROW_HEIGHT 80
 
 #include <QAbstractTableModel>
+#include <QSize>
+#include "student.h"
+#include "../ui/mainwindow.h"
 
 class DataModel: public QAbstractTableModel{
 
@@ -15,4 +19,4 @@ public:
 
 };
 
-#endif // DATAMODEL_H
+#endif // DATA_ADAPTER_H
