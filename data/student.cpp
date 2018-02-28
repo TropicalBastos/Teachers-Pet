@@ -35,7 +35,7 @@ const char* appstate::qstringToCstring(QString string){
 
 /*
  * Insert a new student into the app's state and
- * return a reference to that student
+ * return a pointer to that student
  */
 appstate::STUDENT* appstate::insertStudent(const char* studentName){
     using namespace appstate;

@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QDebug>
 #include <QDesktopWidget>
+#include <QDir>
 #include "../data/student.h"
 
 namespace Ui {

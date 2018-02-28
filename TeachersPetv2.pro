@@ -28,13 +28,15 @@ SOURCES += \
     main.cpp \
     ui/addstudent.cpp \
     ui/addstudentdialog.cpp \
-    data/student.cpp
+    data/student.cpp \
+    data/datamodel.cpp
 
 HEADERS += \
     ui/mainwindow.h \
     ui/addstudent.h \
     ui/addstudentdialog.h \
-    data/student.h
+    data/student.h \
+    data/datamodel.h
 
 FORMS += \
     ui/mainwindow.ui
