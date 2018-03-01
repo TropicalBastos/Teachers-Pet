@@ -27,7 +27,7 @@ QVariant DataAdapter::data(const QModelIndex &index, int role) const{
             const char* name = studentList.at(row)->name;
             QString str;
             str.sprintf("%s", name);
-            qDebug() << row;
+            //qDebug() << str;
             return str;
         }
         break;

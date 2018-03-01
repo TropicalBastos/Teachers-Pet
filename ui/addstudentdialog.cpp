@@ -48,7 +48,7 @@ AddStudentDialog::AddStudentDialog(QWidget *parent):
  */
 void AddStudentDialog::onAddStudentClick(){
     using namespace appstate;
-    const char* studentName = qstringToCstring(studentText->text());
+    char* studentName = qstringToCstring(studentText->text());
     insertStudent(studentName);
     MainWindow::getInstance()->updateUi();
     this->close();

@@ -11,7 +11,7 @@ std::vector<appstate::STUDENT*> appstate::studentList;
 
 void appstate::initStudentList(){
     using namespace appstate;
-    STUDENT* student = new STUDENT{ UNINITIALIZED_ID, UNINITIALIZED_NAME, false };
+    STUDENT* student = new STUDENT{ UNINITIALIZED_ID, (char*) UNINITIALIZED_NAME, false };
     studentList.push_back(student);
 }
 
@@ -27,9 +27,9 @@ void appstate::printStudents(){
  * Converts QString and returns a char*:
  * Much better for serialization
 */
-const char* appstate::qstringToCstring(QString string){
+char* appstate::qstringToCstring(QString string){
     QByteArray byteArray = string.toLatin1();
-    const char* byteDataPayload = byteArray.data();
+    char* byteDataPayload = byteArray.data();
     return byteDataPayload;
 }
 
@@ -37,16 +37,25 @@ const char* appstate::qstringToCstring(QString string){
  * Insert a new student into the app's state and
  * return a pointer to that student
  */
-appstate::STUDENT* appstate::insertStudent(const char* studentName){
+appstate::STUDENT* appstate::insertStudent(char* studentName){
     using namespace appstate;
     int newId = 0;
 
     if(!studentList.empty()){
+        //qDebug() << "Is not empty";
         STUDENT* lastStudent = studentList.back();
-        int newId = lastStudent->id + 1;
+        newId = lastStudent->id + 1;
     }
 
-    STUDENT* newStudent = new STUDENT{newId, studentName, false};
+    for(std::vector<STUDENT*>::iterator it = studentList.begin(); it != studentList.end(); ++it){
+        std::cout << "From vector: " << (*it)->name << std::endl;
+    }
+
+    STUDENT* newStudent = new STUDENT();
+    newStudent->id = newId;
+    newStudent->paid = false;
+    newStudent->name = (char*) malloc((strlen(studentName) + 1) * sizeof(char));
+    strcpy(newStudent->name, studentName);
     studentList.push_back(newStudent);
     std::cout << studentName << " inserted into app state" << std::endl;
     return newStudent;

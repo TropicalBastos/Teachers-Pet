@@ -8,6 +8,8 @@
 #include <iostream>
 #include <QString>
 #include <QByteArray>
+#include <QDebug>
+#include <vector>
 
 /**
  * App state is accessed and initialised to 0 here
@@ -19,15 +21,15 @@ namespace appstate{
 
 typedef struct studentStruct{
     int id;
-    const char* name;
+    char* name;
     bool paid;
 } STUDENT;
 
 extern std::vector<STUDENT*> studentList;
 void initStudentList();
 void printStudents();
-const char* qstringToCstring(QString string);
-STUDENT* insertStudent(const char* studentName);
+char* qstringToCstring(QString string);
+STUDENT* insertStudent(char* studentName);
 int getStudentCount();
 
 }
