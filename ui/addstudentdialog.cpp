@@ -50,7 +50,8 @@ void AddStudentDialog::onAddStudentClick(){
     using namespace appstate;
     char* studentName = qstringToCstring(studentText->text());
     insertStudent(studentName);
-    MainWindow::getInstance()->updateUi();
+    DataAdapter* da = DataAdapter::getInstance();
+    da->add();
     this->close();
 }
 

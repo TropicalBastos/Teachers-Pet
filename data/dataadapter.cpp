@@ -11,7 +11,7 @@ int DataAdapter::rowCount(const QModelIndex &parent) const{
 }
 
 int DataAdapter::columnCount(const QModelIndex &parent) const{
-    return STUDENT_MEMBERS;
+    return COLUMN_COUNT;
 }
 
 QVariant DataAdapter::data(const QModelIndex &index, int role) const{
@@ -64,6 +64,7 @@ QVariant DataAdapter::headerData(int section, Qt::Orientation orientation, int r
             if(section == 0) return "Student ID";
             if(section == 1) return "Name";
             if(section == 2) return "Paid";
+            if(section == 3) return "Remove";
         }
     }
     return QVariant();
@@ -78,11 +79,24 @@ DataAdapter* DataAdapter::getInstance(){
     return DataAdapter::instance;
 }
 
-void DataAdapter::update(){
+void DataAdapter::add(){
     beginInsertRows(QModelIndex(), appstate::studentList.size(), appstate::studentList.size());
     endInsertRows();
 
     QModelIndex top = createIndex(appstate::studentList.size() - 1, 0, Q_NULLPTR);
+    QModelIndex bottom = createIndex(appstate::studentList.size() - 1, 3, Q_NULLPTR);
+
+    emit dataChanged(top, bottom);
+}
+
+void DataAdapter::remove(int id){
+    int rowRemoved = appstate::removeStudent(id);
+    int rowAfter = (rowRemoved == appstate::studentList.size())
+            ? appstate::studentList.size(): rowRemoved + 1;
+    beginRemoveRows(QModelIndex(), rowRemoved, rowAfter);
+    endRemoveRows();
+
+    QModelIndex top = createIndex(0, 0, Q_NULLPTR);
     QModelIndex bottom = createIndex(appstate::studentList.size() - 1, 3, Q_NULLPTR);
 
     emit dataChanged(top, bottom);

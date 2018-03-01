@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     DataAdapter da(0);
     tableView.setModel(&da);
     tableView.show();
-    tableView.setFixedSize(w.width(), w.height() / 2);
-    tableView.move(tableView.x(), tableView.y() + 50);
+    tableView.setFixedSize(w.width(), w.height() * 0.7);
+    tableView.move(tableView.x(), tableView.y() + 24);
     QHeaderView* header = tableView.horizontalHeader();
     header->setSectionResizeMode(QHeaderView::Stretch);
     /* End setup */

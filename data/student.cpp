@@ -42,7 +42,6 @@ appstate::STUDENT* appstate::insertStudent(char* studentName){
     int newId = 0;
 
     if(!studentList.empty()){
-        //qDebug() << "Is not empty";
         STUDENT* lastStudent = studentList.back();
         newId = lastStudent->id + 1;
     }
@@ -63,4 +62,23 @@ appstate::STUDENT* appstate::insertStudent(char* studentName){
 
 int appstate::getStudentCount(){
     return appstate::studentList.size();
+}
+
+int appstate::removeStudent(int id){
+    using namespace appstate;
+    int removedId = NULL;
+
+    for(std::vector<STUDENT*>::iterator it = studentList.begin(); it != studentList.end(); ++it){
+        if((*it)->id == id){
+            removedId - (*it)->id;
+            studentList.erase(it);
+        }
+    }
+
+    if(removedId == NULL){
+        throw std::invalid_argument("Not a valid student removed");
+        exit(-1);
+    }
+
+    return removedId;
 }

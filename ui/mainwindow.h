@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QDir>
+#include <QMenu>
 #include "../data/student.h"
 #include "../data/dataadapter.h"
 
@@ -38,6 +39,7 @@ private:
     void init();
     void renderMainMenu();
     void setMenuListeners();
+    void renderAddButton();
     static MainWindow* instance;
 };
 

@@ -30,6 +30,7 @@ void initStudentList();
 void printStudents();
 char* qstringToCstring(QString string);
 STUDENT* insertStudent(char* studentName);
+int removeStudent(int id);
 int getStudentCount();
 
 }

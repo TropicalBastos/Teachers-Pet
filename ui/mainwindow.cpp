@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Initialise base GUI
     init();
     renderMainMenu();
+    renderAddButton();
     setMenuListeners();
 
     //Initialise data layer
@@ -56,7 +57,7 @@ void MainWindow::init(){
     QAction* actionQuit = ui->actionQuit;
     this->connect(actionQuit, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
     setWindowTitle("Teacher's Pet");
-    setFixedSize(400, 300);
+    setFixedSize(500, 400);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     MainWindow::instance = this;
 }
@@ -90,11 +91,15 @@ void MainWindow::setMenuListeners(){
     connect(exitAction, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
 }
 
+void MainWindow::renderAddButton(){
+    int x = (this->width() / 2) - (ui->pushButton->width() / 2);
+    int y = this->height() - (ui->pushButton->height() * 1.75);
+    ui->pushButton->move(x, y);
+}
+
 /** Update UI based on updated data **/
 void MainWindow::updateUi(){
     std::cout << "UI TO BE UPDATED" << std::endl;
-    DataAdapter* da = DataAdapter::getInstance();
-    da->update();
 }
 
 void MainWindow::on_actionQuit_triggered(){
