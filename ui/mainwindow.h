@@ -7,6 +7,7 @@
 #include <QDesktopWidget>
 #include <QDir>
 #include "../data/student.h"
+#include "../data/dataadapter.h"
 
 namespace Ui {
 class MainWindow;

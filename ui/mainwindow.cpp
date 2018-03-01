@@ -15,8 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setMenuListeners();
 
     //Initialise data layer
-    appstate::initStudentList();
-    appstate::printStudents();
+//    appstate::initStudentList();
+//    appstate::printStudents();
 }
 
 MainWindow::~MainWindow()
@@ -93,6 +93,8 @@ void MainWindow::setMenuListeners(){
 /** Update UI based on updated data **/
 void MainWindow::updateUi(){
     std::cout << "UI TO BE UPDATED" << std::endl;
+    DataAdapter* da = DataAdapter::getInstance();
+    da->update();
 }
 
 void MainWindow::on_actionQuit_triggered(){

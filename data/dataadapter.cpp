@@ -1,7 +1,9 @@
 #include "dataadapter.h"
 
-DataAdapter::DataAdapter(QObject *parent): QAbstractTableModel(parent){
+DataAdapter* DataAdapter::instance;
 
+DataAdapter::DataAdapter(QObject *parent): QAbstractTableModel(parent){
+    DataAdapter::instance = this;
 }
 
 int DataAdapter::rowCount(const QModelIndex &parent) const{
@@ -21,7 +23,13 @@ QVariant DataAdapter::data(const QModelIndex &index, int role) const{
     switch(role){
     case Qt::DisplayRole:
         if(col == 0) return studentList.at(row)->id;
-        if(col == 1) return studentList.at(row)->name;
+        if(col == 1){
+            const char* name = studentList.at(row)->name;
+            QString str;
+            str.sprintf("%s", name);
+            qDebug() << row;
+            return str;
+        }
         break;
 
     case Qt::TextAlignmentRole:
@@ -59,4 +67,23 @@ QVariant DataAdapter::headerData(int section, Qt::Orientation orientation, int r
         }
     }
     return QVariant();
+}
+
+
+/*
+ * We need a global instance so our parent ui
+ * can signal events to change data
+*/
+DataAdapter* DataAdapter::getInstance(){
+    return DataAdapter::instance;
+}
+
+void DataAdapter::update(){
+    beginInsertRows(QModelIndex(), appstate::studentList.size(), appstate::studentList.size());
+    endInsertRows();
+
+    QModelIndex top = createIndex(appstate::studentList.size() - 1, 0, Q_NULLPTR);
+    QModelIndex bottom = createIndex(appstate::studentList.size() - 1, 3, Q_NULLPTR);
+
+    emit dataChanged(top, bottom);
 }

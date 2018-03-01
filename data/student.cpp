@@ -39,8 +39,13 @@ const char* appstate::qstringToCstring(QString string){
  */
 appstate::STUDENT* appstate::insertStudent(const char* studentName){
     using namespace appstate;
-    STUDENT* lastStudent = studentList.back();
-    int newId = lastStudent->id + 1;
+    int newId = 0;
+
+    if(!studentList.empty()){
+        STUDENT* lastStudent = studentList.back();
+        int newId = lastStudent->id + 1;
+    }
+
     STUDENT* newStudent = new STUDENT{newId, studentName, false};
     studentList.push_back(newStudent);
     std::cout << studentName << " inserted into app state" << std::endl;
