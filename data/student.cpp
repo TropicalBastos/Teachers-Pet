@@ -73,23 +73,16 @@ int appstate::removeStudent(int id){
     for(size_t i = 0; i < studentList.size(); i++){
         STUDENT* stdPtr = studentList.at(i);
         if(stdPtr->id == id){
-            qDebug() << "Found id with name: " << stdPtr->name;
             removedId = stdPtr->id;
             qDebug() << "Removing " << stdPtr->name;
             studentList.erase(studentList.begin() + i);
-            qDebug() << "Removed.";
         }
-        qDebug() << "Iterator at: " << i;
     }
-
-    qDebug() << "Current removed id: " << removedId;
 
     if(removedId == -1){
         throw std::invalid_argument("Not a valid student removed");
         exit(-1);
     }
-
-    qDebug() << "Removed id: " << removedId;
 
     return removedId;
 }

@@ -106,7 +106,7 @@ void DataAdapter::remove(int id){
     endRemoveRows();
 
     QModelIndex top = createIndex(rowRemoved, 0, Q_NULLPTR);
-    QModelIndex bottom = createIndex(rowRemoved, COLUMN_COUNT, Q_NULLPTR);
+    QModelIndex bottom = createIndex(rowAfter, COLUMN_COUNT, Q_NULLPTR);
 
     emit dataChanged(top, bottom);
 }
@@ -115,10 +115,13 @@ void DataAdapter::onCellClicked(const QModelIndex& index){
     int row = index.row();
     int column = index.column();
 
+    QAbstractTableModel* model = (QAbstractTableModel*) index.model();
+    int id = model->data(model->index(row, 0), Qt::DisplayRole).toInt();
+
     qDebug() << "Cell Clicked!";
     switch(column){
         case REMOVE_COLUMN:
-        remove(row);
+        remove(id);
         break;
     }
 }
