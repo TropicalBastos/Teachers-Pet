@@ -66,19 +66,30 @@ int appstate::getStudentCount(){
 
 int appstate::removeStudent(int id){
     using namespace appstate;
-    int removedId = NULL;
+    int removedId = -1;
 
-    for(std::vector<STUDENT*>::iterator it = studentList.begin(); it != studentList.end(); ++it){
-        if((*it)->id == id){
-            removedId - (*it)->id;
-            studentList.erase(it);
+    qDebug() << "Passed id: " << id;
+
+    for(size_t i = 0; i < studentList.size(); i++){
+        STUDENT* stdPtr = studentList.at(i);
+        if(stdPtr->id == id){
+            qDebug() << "Found id with name: " << stdPtr->name;
+            removedId = stdPtr->id;
+            qDebug() << "Removing " << stdPtr->name;
+            studentList.erase(studentList.begin() + i);
+            qDebug() << "Removed.";
         }
+        qDebug() << "Iterator at: " << i;
     }
 
-    if(removedId == NULL){
+    qDebug() << "Current removed id: " << removedId;
+
+    if(removedId == -1){
         throw std::invalid_argument("Not a valid student removed");
         exit(-1);
     }
+
+    qDebug() << "Removed id: " << removedId;
 
     return removedId;
 }

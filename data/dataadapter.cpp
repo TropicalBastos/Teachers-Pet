@@ -3,6 +3,8 @@
 DataAdapter* DataAdapter::instance;
 
 DataAdapter::DataAdapter(QObject *parent): QAbstractTableModel(parent){
+    using namespace maintable;
+    connect(tableView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(onCellClicked(const QModelIndex&)));
     DataAdapter::instance = this;
 }
 
@@ -30,15 +32,22 @@ QVariant DataAdapter::data(const QModelIndex &index, int role) const{
             //qDebug() << str;
             return str;
         }
+        if(col == 3) return "Delete";
         break;
 
     case Qt::TextAlignmentRole:
-        return Qt::AlignVCenter;
+        return Qt::AlignCenter;
         break;
 
     case Qt::SizeHintRole: {
         QSize size(MainWindow::getInstance()->width(), ROW_HEIGHT);
         return size;
+        break;
+    }
+
+    case Qt::BackgroundRole: {
+        QBrush brush(QColor(DANGER));
+        if(col == 3) return brush;
         break;
     }
 
@@ -84,20 +93,32 @@ void DataAdapter::add(){
     endInsertRows();
 
     QModelIndex top = createIndex(appstate::studentList.size() - 1, 0, Q_NULLPTR);
-    QModelIndex bottom = createIndex(appstate::studentList.size() - 1, 3, Q_NULLPTR);
+    QModelIndex bottom = createIndex(appstate::studentList.size() - 1, COLUMN_COUNT, Q_NULLPTR);
 
     emit dataChanged(top, bottom);
 }
 
 void DataAdapter::remove(int id){
     int rowRemoved = appstate::removeStudent(id);
-    int rowAfter = (rowRemoved == appstate::studentList.size())
+    int rowAfter = (rowRemoved == (int) appstate::studentList.size())
             ? appstate::studentList.size(): rowRemoved + 1;
     beginRemoveRows(QModelIndex(), rowRemoved, rowAfter);
     endRemoveRows();
 
-    QModelIndex top = createIndex(0, 0, Q_NULLPTR);
-    QModelIndex bottom = createIndex(appstate::studentList.size() - 1, 3, Q_NULLPTR);
+    QModelIndex top = createIndex(rowRemoved, 0, Q_NULLPTR);
+    QModelIndex bottom = createIndex(rowRemoved, COLUMN_COUNT, Q_NULLPTR);
 
     emit dataChanged(top, bottom);
+}
+
+void DataAdapter::onCellClicked(const QModelIndex& index){
+    int row = index.row();
+    int column = index.column();
+
+    qDebug() << "Cell Clicked!";
+    switch(column){
+        case REMOVE_COLUMN:
+        remove(row);
+        break;
+    }
 }

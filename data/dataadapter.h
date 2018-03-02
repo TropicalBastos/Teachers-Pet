@@ -2,11 +2,23 @@
 #define DATA_ADAPTER_H
 #define ROW_HEIGHT 80
 #define COLUMN_COUNT 4
+#define ID_COLUMN 0
+#define NAME_COLUMN 1
+#define PAID_COLUMN 2
+#define REMOVE_COLUMN 3
+#define DANGER 255, 56, 56
 
 #include <QAbstractTableModel>
 #include <QSize>
 #include "student.h"
 #include "../ui/mainwindow.h"
+#include <QPushButton>
+#include <QBrush>
+
+/* Global table */
+namespace maintable {
+    extern QTableView* tableView;
+}
 
 class DataAdapter: public QAbstractTableModel{
 
@@ -21,6 +33,9 @@ public:
     void add();
     void remove(int id);
     static DataAdapter* getInstance();
+
+public slots:
+    void onCellClicked(const QModelIndex& index);
 
 private:
     static DataAdapter* instance;

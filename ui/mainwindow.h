@@ -7,6 +7,7 @@
 #include <QDesktopWidget>
 #include <QDir>
 #include <QMenu>
+#include <QTableView>
 #include "../data/student.h"
 #include "../data/dataadapter.h"
 
