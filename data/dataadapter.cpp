@@ -100,13 +100,12 @@ void DataAdapter::add(){
 
 void DataAdapter::remove(int id){
     int rowRemoved = appstate::removeStudent(id);
-    int rowAfter = (rowRemoved == (int) appstate::studentList.size())
-            ? appstate::studentList.size(): rowRemoved + 1;
-    beginRemoveRows(QModelIndex(), rowRemoved, rowAfter);
+    if(appstate::studentList.size() == 0) rowRemoved = 0;
+    beginRemoveRows(QModelIndex(), rowRemoved, rowRemoved);
     endRemoveRows();
 
     QModelIndex top = createIndex(rowRemoved, 0, Q_NULLPTR);
-    QModelIndex bottom = createIndex(rowAfter, COLUMN_COUNT, Q_NULLPTR);
+    QModelIndex bottom = createIndex(rowRemoved, COLUMN_COUNT, Q_NULLPTR);
 
     emit dataChanged(top, bottom);
 }
