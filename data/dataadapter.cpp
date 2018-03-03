@@ -116,6 +116,11 @@ void DataAdapter::onCellClicked(const QModelIndex& index){
 
     QAbstractTableModel* model = (QAbstractTableModel*) index.model();
     int id = model->data(model->index(row, 0), Qt::DisplayRole).toInt();
+    QString name = model->data(model->index(row, NAME_COLUMN), Qt::DisplayRole).toString();
+
+    bool confirm = confirmDelete(name);
+    if(!confirm)
+        return;
 
     qDebug() << "Cell Clicked!";
     switch(column){
@@ -123,4 +128,13 @@ void DataAdapter::onCellClicked(const QModelIndex& index){
         remove(id);
         break;
     }
+}
+
+bool DataAdapter::confirmDelete(QString name){
+    QString text("Are you sure you want to delete ");
+    text.append(name);
+    int reply;
+    reply = QMessageBox::question(MainWindow::getInstance(),
+                                  "Caution",  text, QMessageBox::Yes, QMessageBox::No);
+    return (reply == QMessageBox::Yes);
 }

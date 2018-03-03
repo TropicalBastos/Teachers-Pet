@@ -14,6 +14,7 @@
 #include "../ui/mainwindow.h"
 #include <QPushButton>
 #include <QBrush>
+#include <QMessageBox>
 
 /* Global table */
 namespace maintable {
@@ -32,6 +33,7 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
     void add();
     void remove(int id);
+    bool confirmDelete(QString name);
     static DataAdapter* getInstance();
 
 public slots:
