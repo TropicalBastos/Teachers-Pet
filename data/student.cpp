@@ -20,6 +20,7 @@ void appstate::printStudents(){
     using namespace appstate;
     for(vector<STUDENT*>::iterator it = studentList.begin(); it != studentList.end(); ++it){
         cout << (*it)->name << endl;
+        cout << "Has paid: " << (*it)->paid << endl;
     }
 }
 
@@ -85,4 +86,22 @@ int appstate::removeStudent(int id){
     }
 
     return removedId;
+}
+
+appstate::STUDENT* appstate::getStudentById(int id){
+    using namespace appstate;
+    STUDENT* student = 0;
+    for(size_t i = 0; i < studentList.size(); i++){
+        STUDENT* stdPtr = studentList.at(i);
+        if(stdPtr->id == id){
+            student = stdPtr;
+        }
+    }
+    return student;
+}
+
+bool appstate::toggleCheckedState(int id, bool isChecked){
+    STUDENT* student = getStudentById(id);
+    student->paid = !isChecked;
+    return !isChecked;
 }

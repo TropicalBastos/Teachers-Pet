@@ -117,14 +117,19 @@ void DataAdapter::onCellClicked(const QModelIndex& index){
     QAbstractTableModel* model = (QAbstractTableModel*) index.model();
     int id = model->data(model->index(row, 0), Qt::DisplayRole).toInt();
     QString name = model->data(model->index(row, NAME_COLUMN), Qt::DisplayRole).toString();
-
-    bool confirm = confirmDelete(name);
-    if(!confirm)
-        return;
+    bool isChecked = (bool) model->data(model->index(row, PAID_COLUMN), Qt::CheckStateRole).toBool();
 
     qDebug() << "Cell Clicked!";
     switch(column){
+        case PAID_COLUMN:
+        qDebug() << "Paid cell clicked!";
+        handleCheckbox(row, id, isChecked);
+        break;
+
         case REMOVE_COLUMN:
+        bool confirm = confirmDelete(name);
+        if(!confirm)
+            break;
         remove(id);
         break;
     }
@@ -137,4 +142,11 @@ bool DataAdapter::confirmDelete(QString name){
     reply = QMessageBox::question(MainWindow::getInstance(),
                                   "Caution",  text, QMessageBox::Yes, QMessageBox::No);
     return (reply == QMessageBox::Yes);
+}
+
+void DataAdapter::handleCheckbox(int row, int id, bool isChecked){
+    appstate::toggleCheckedState(id, isChecked);
+    QModelIndex top = createIndex(row, 0, Q_NULLPTR);
+    QModelIndex bottom = createIndex(row, COLUMN_COUNT, Q_NULLPTR);
+    emit dataChanged(top, bottom);
 }

@@ -29,9 +29,11 @@ extern std::vector<STUDENT*> studentList;
 void initStudentList();
 void printStudents();
 char* qstringToCstring(QString string);
+STUDENT* getStudentById(int id);
 STUDENT* insertStudent(char* studentName);
 int removeStudent(int id);
 int getStudentCount();
+bool toggleCheckedState(int id, bool isChecked);
 
 }
 

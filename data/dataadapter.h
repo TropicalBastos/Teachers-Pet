@@ -34,6 +34,7 @@ public:
     void add();
     void remove(int id);
     bool confirmDelete(QString name);
+    void handleCheckbox(int row, int id, bool isChecked);
     static DataAdapter* getInstance();
 
 public slots:
