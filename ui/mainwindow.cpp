@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     init();
     renderMainMenu();
     renderAddButton();
+    renderResetButton();
     setMenuListeners();
 
     //Initialise data layer
@@ -57,7 +58,7 @@ void MainWindow::init(){
     QAction* actionQuit = ui->actionQuit;
     this->connect(actionQuit, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
     setWindowTitle("Teacher's Pet");
-    setFixedSize(500, 400);
+    setFixedSize(500, 500);
     this->move(QApplication::desktop()->screen()->rect().center() - this->rect().center());
     MainWindow::instance = this;
 }
@@ -94,7 +95,7 @@ void MainWindow::setMenuListeners(){
 void MainWindow::renderAddButton(){
     int x = (this->width() / 2) - (ui->pushButton->width() / 2);
     int y = this->height() - (ui->pushButton->height() * 1.75);
-    ui->pushButton->move(x, y);
+    ui->pushButton->move(x, y - 45);
 }
 
 /** Update UI based on updated data **/
@@ -108,4 +109,11 @@ void MainWindow::on_actionQuit_triggered(){
 
 std::vector<appstate::STUDENT*> MainWindow::getStudents(){
     return appstate::studentList;
+}
+
+void MainWindow::renderResetButton(){
+    QPushButton* resetButton = new QPushButton("Reset Week", this);
+    resetButton->show();
+    resetButton->move(ui->pushButton->x(), ui->pushButton->y() + 50);
+    resetButton->resize(ui->pushButton->size());
 }

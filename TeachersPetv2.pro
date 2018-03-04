@@ -29,14 +29,16 @@ SOURCES += \
     ui/addstudent.cpp \
     ui/addstudentdialog.cpp \
     data/student.cpp \
-    data/dataadapter.cpp
+    data/dataadapter.cpp \
+    data/resetter.cpp
 
 HEADERS += \
     ui/mainwindow.h \
     ui/addstudent.h \
     ui/addstudentdialog.h \
     data/student.h \
-    data/dataadapter.h
+    data/dataadapter.h \
+    data/resetter.h
 
 FORMS += \
     ui/mainwindow.ui

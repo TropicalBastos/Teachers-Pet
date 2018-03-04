@@ -41,6 +41,7 @@ private:
     void renderMainMenu();
     void setMenuListeners();
     void renderAddButton();
+    void renderResetButton();
     static MainWindow* instance;
 };
 
