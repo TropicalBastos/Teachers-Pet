@@ -29,6 +29,7 @@ public:
 private slots:
     void on_actionQuit_triggered();
     void slotTest();
+    void resetButtonClicked();
 
 private:
     QMenu* menu;

@@ -15,6 +15,7 @@
 #include <QPushButton>
 #include <QBrush>
 #include <QMessageBox>
+#include "resetter.h"
 
 /* Global table */
 namespace maintable {
@@ -35,6 +36,7 @@ public:
     void remove(int id);
     bool confirmDelete(QString name);
     void handleCheckbox(int row, int id, bool isChecked);
+    void resetPaidCells();
     static DataAdapter* getInstance();
 
 public slots:

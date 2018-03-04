@@ -150,3 +150,10 @@ void DataAdapter::handleCheckbox(int row, int id, bool isChecked){
     QModelIndex bottom = createIndex(row, COLUMN_COUNT, Q_NULLPTR);
     emit dataChanged(top, bottom);
 }
+
+void DataAdapter::resetPaidCells(){
+    Resetter::reset();
+    QModelIndex top = this->index(0, 0);
+    QModelIndex bottom = this->index(appstate::studentList.size(), COLUMN_COUNT);
+    emit dataChanged(top, bottom);
+}

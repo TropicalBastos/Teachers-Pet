@@ -116,4 +116,16 @@ void MainWindow::renderResetButton(){
     resetButton->show();
     resetButton->move(ui->pushButton->x(), ui->pushButton->y() + 50);
     resetButton->resize(ui->pushButton->size());
+    connect(resetButton, SIGNAL(clicked(bool)), this, SLOT(resetButtonClicked()));
+}
+
+void MainWindow::resetButtonClicked(){
+    int reply;
+    reply = QMessageBox::question(this, "Caution",
+                                  "Are you sure you wish to reset the payments for this week?",
+                                  QMessageBox::No, QMessageBox::Yes);
+    if(reply == QMessageBox::Yes){
+        DataAdapter* da = DataAdapter::getInstance();
+        da->resetPaidCells();
+    }
 }
