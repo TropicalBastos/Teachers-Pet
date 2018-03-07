@@ -22,7 +22,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-
 SOURCES += \
     ui/mainwindow.cpp \
     main.cpp \
@@ -30,7 +29,8 @@ SOURCES += \
     ui/addstudentdialog.cpp \
     data/student.cpp \
     data/dataadapter.cpp \
-    data/resetter.cpp
+    data/resetter.cpp \
+    data/binaryserializer.cpp
 
 HEADERS += \
     ui/mainwindow.h \
@@ -38,7 +38,8 @@ HEADERS += \
     ui/addstudentdialog.h \
     data/student.h \
     data/dataadapter.h \
-    data/resetter.h
+    data/resetter.h \
+    data/binaryserializer.h
 
 FORMS += \
     ui/mainwindow.ui

@@ -3,6 +3,7 @@
 #include <QTableView>
 #include <QHeaderView>
 #include "data/dataadapter.h"
+#include "data/binaryserializer.h"
 
 QTableView* maintable::tableView;
 

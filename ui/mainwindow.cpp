@@ -88,7 +88,7 @@ void MainWindow::setMenuListeners(){
     connect(ui->toolButton, SIGNAL(clicked(bool)), this, SLOT(slotTest()));
     connect(newAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
     connect(openAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
-    connect(saveAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
+    connect(saveAction, SIGNAL(triggered(bool)), this, SLOT(saveFile()));
     connect(exitAction, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
 }
 
@@ -128,4 +128,9 @@ void MainWindow::resetButtonClicked(){
         DataAdapter* da = DataAdapter::getInstance();
         da->resetPaidCells();
     }
+}
+
+void MainWindow::saveFile(){
+    QFileDialog* fileDialog = new QFileDialog(this, Qt::Dialog);
+    fileDialog->show();
 }

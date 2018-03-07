@@ -8,8 +8,10 @@
 #include <QDir>
 #include <QMenu>
 #include <QTableView>
+#include <QFileDialog>
 #include "../data/student.h"
 #include "../data/dataadapter.h"
+#include "../data/binaryserializer.h"
 
 namespace Ui {
 class MainWindow;
@@ -43,6 +45,7 @@ private:
     void setMenuListeners();
     void renderAddButton();
     void renderResetButton();
+    void saveFile();
     static MainWindow* instance;
 };
 

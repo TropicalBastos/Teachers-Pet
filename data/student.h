@@ -4,7 +4,6 @@
 #define UNINITIALIZED_NAME "$not_initialized$"
 #define STUDENT_MEMBERS 3
 
-#include <vector>
 #include <iostream>
 #include <QString>
 #include <QByteArray>
