@@ -19,7 +19,10 @@ class BinarySerializer{
 public:
     BinarySerializer();
     void write(const char* outPath);
-    //std::vector<appstate::STUDENT*> read(const char* path);
+    void read(const char* path);
+
+    //Debug method
+    void printReadResult();
 
 private:
     struct vectorBufStruct{
@@ -27,6 +30,8 @@ private:
       std::string charStreamName;
       bool paid;
     };
+
+    /* Reference to the app state's student list */
     std::vector<appstate::STUDENT*> &studentList;
     std::vector<vectorBufStruct> vectorBuf;
 

@@ -4,6 +4,7 @@ BinarySerializer::BinarySerializer() :
     studentList(appstate::studentList){}
 
 void BinarySerializer::write(const char* outPath){
+
     //buffer is the true output file path
     char buffer[50];
     sprintf(buffer, "%s%s", outPath, EXT);
@@ -50,5 +51,45 @@ void BinarySerializer::write(const char* outPath){
 
     out.flush();
     out.close();
+
+}
+
+/* Order of deserialization is as follows:
+* int id
+* bool paid
+* char array (string) name
+* char seperator - seperates each struct
+*/
+void BinarySerializer::read(const char *path){
+
+    std::ifstream in(path, std::ios::in);
+    uint32_t vSize = 0;
+    in.read(reinterpret_cast<char*>(&vSize), sizeof(uint32_t));
+    for(unsigned int i = 0; i < vSize; i++){
+        using namespace appstate;
+        std::string charStream = "";
+        STUDENT* student = new STUDENT();
+        in.read(reinterpret_cast<char*>(&student->id), sizeof(int));
+        in.read(reinterpret_cast<char*>(&student->paid), sizeof(bool));
+        char buffer;
+        while(buffer != '|'){
+            in.read(&buffer, sizeof(char));
+            if(buffer == '|') break;
+            charStream += buffer;
+        }
+        student->name = (char*) malloc(charStream.length() * sizeof(char));
+        strcpy(student->name, charStream.c_str());
+        studentList.push_back(student);
+    }
+
+}
+
+void BinarySerializer::printReadResult(){
+
+    qDebug() << "Printing results of binary read data:";
+    for(std::vector<appstate::STUDENT*>::iterator it = studentList.begin(); it != studentList.end(); ++it){
+        qDebug() << "Student id: " << (*it)->id;
+        qDebug() << "Student name: " << (*it)->name;
+    }
 
 }
