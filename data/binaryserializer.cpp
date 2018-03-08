@@ -27,6 +27,7 @@ void BinarySerializer::write(char* outPath){
     }
 
     //now begin the serialization process
+    std::cout << "Saving to: " << outPath << std::endl;
     uint32_t vSize = vectorBuf.size();
     std::ofstream out(outPath, std::ios::out | std::ios::binary);
     out.write(reinterpret_cast<char*>(&vSize), sizeof(uint32_t));
@@ -63,7 +64,13 @@ void BinarySerializer::write(char* outPath){
 * char array (string) name
 * char seperator - seperates each struct
 */
-void BinarySerializer::read(const char *path){
+void BinarySerializer::read(char *path){
+
+    //validate file
+    validateFileType(path);
+
+    //truncate studentlist state
+    studentList = std::vector<appstate::STUDENT*>();
 
     std::ifstream in(path, std::ios::in);
     uint32_t vSize = 0;
@@ -72,18 +79,24 @@ void BinarySerializer::read(const char *path){
         using namespace appstate;
         std::string charStream = "";
         STUDENT* student = new STUDENT();
+
+        //read subsequent properties
         in.read(reinterpret_cast<char*>(&student->id), sizeof(int));
         in.read(reinterpret_cast<char*>(&student->paid), sizeof(bool));
-        char buffer;
+
+        char buffer = '0';
         while(buffer != '|'){
             in.read(&buffer, sizeof(char));
             if(buffer == '|') break;
             charStream += buffer;
         }
+
         student->name = (char*) malloc(charStream.length() * sizeof(char));
         strcpy(student->name, charStream.c_str());
         studentList.push_back(student);
     }
+
+    std::cout << "File read: " << path << std::endl;
 
 }
 
@@ -108,6 +121,5 @@ void BinarySerializer::validateFileType(char* path){
         stringPath.append(EXT);
     }
 
-    std::cout << "Saving to: " << stringPath << std::endl;
     snprintf(path, (stringPath.length() + 1) * sizeof(char), "%s", stringPath.c_str());
 }

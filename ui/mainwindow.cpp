@@ -87,7 +87,7 @@ void MainWindow::renderMainMenu(){
 void MainWindow::setMenuListeners(){
     connect(ui->toolButton, SIGNAL(clicked(bool)), this, SLOT(slotTest()));
     connect(newAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
-    connect(openAction, SIGNAL(triggered(bool)), this, SLOT(slotTest()));
+    connect(openAction, SIGNAL(triggered(bool)), this, SLOT(loadFile()));
     connect(saveAction, SIGNAL(triggered(bool)), this, SLOT(saveFile()));
     connect(exitAction, SIGNAL(triggered(bool)), this, SLOT(on_actionQuit_triggered()));
 }
@@ -140,4 +140,11 @@ void MainWindow::saveFile(){
 
     BinarySerializer bs;
     bs.write(path);
+}
+
+void MainWindow::loadFile(){
+    QUrl dest = QFileDialog::getOpenFileUrl(this, QString("Select .tp file"), QDir::homePath(), QString("(*.tp)"));
+    char* path = dest.toString().toLatin1().data();
+    DataAdapter* da = DataAdapter::getInstance();
+    da->loadData(path);
 }

@@ -153,7 +153,19 @@ void DataAdapter::handleCheckbox(int row, int id, bool isChecked){
 
 void DataAdapter::resetPaidCells(){
     Resetter::reset();
+    update();
+}
+
+void DataAdapter::update(){
     QModelIndex top = this->index(0, 0);
     QModelIndex bottom = this->index(appstate::studentList.size(), COLUMN_COUNT);
     emit dataChanged(top, bottom);
+}
+
+void DataAdapter::loadData(char *path){
+    BinarySerializer bs;
+    bs.read(path);
+    beginInsertRows(QModelIndex(), 0, appstate::studentList.size() -1);
+    endInsertRows();
+    update();
 }

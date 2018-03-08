@@ -21,7 +21,7 @@ class BinarySerializer{
 public:
     BinarySerializer();
     void write(char* outPath);
-    void read(const char* path);
+    void read(char* path);
 
     //Debug method
     void printReadResult();

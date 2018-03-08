@@ -33,6 +33,7 @@ private slots:
     void slotTest();
     void resetButtonClicked();
     void saveFile();
+    void loadFile();
 
 private:
     QMenu* menu;

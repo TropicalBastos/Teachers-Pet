@@ -37,7 +37,8 @@ public:
     bool confirmDelete(QString name);
     void handleCheckbox(int row, int id, bool isChecked);
     void resetPaidCells();
-    void loadData(const char* path);
+    void loadData(char* path);
+    void update();
     static DataAdapter* getInstance();
 
 public slots:
