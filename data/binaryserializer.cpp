@@ -3,11 +3,13 @@
 BinarySerializer::BinarySerializer() :
     studentList(appstate::studentList){}
 
-void BinarySerializer::write(const char* outPath){
+void BinarySerializer::write(char* outPath){
 
-    //buffer is the true output file path
-    char buffer[50];
-    sprintf(buffer, "%s%s", outPath, EXT);
+    //first convert outpath to correct file format ie. (*.tp) file
+    validateFileType(outPath);
+    std::cout << "Outpath is" << outPath << std::endl;
+
+    //vector of buffer structures to hold pure data
     vectorBuf = std::vector<vectorBufStruct>();
 
     //build the vector without pointers but with pure data
@@ -26,7 +28,7 @@ void BinarySerializer::write(const char* outPath){
 
     //now begin the serialization process
     uint32_t vSize = vectorBuf.size();
-    std::ofstream out(buffer, std::ios::out | std::ios::binary);
+    std::ofstream out(outPath, std::ios::out | std::ios::binary);
     out.write(reinterpret_cast<char*>(&vSize), sizeof(uint32_t));
     unsigned int pos = 0;
     while(pos < vSize){
@@ -51,6 +53,7 @@ void BinarySerializer::write(const char* outPath){
 
     out.flush();
     out.close();
+    std::cout << "Saved!" << std::endl;
 
 }
 
@@ -92,4 +95,19 @@ void BinarySerializer::printReadResult(){
         qDebug() << "Student name: " << (*it)->name;
     }
 
+}
+
+void BinarySerializer::validateFileType(char* path){
+    std::string stringPath(path);
+
+    //remove file:/// prefix
+    stringPath.erase(0, PREFIX_LEN);
+
+    std::regex pattern("^.*\\.tp$");
+    if(!std::regex_match(stringPath, pattern)){
+        stringPath.append(EXT);
+    }
+
+    std::cout << "Saving to: " << stringPath << std::endl;
+    snprintf(path, (stringPath.length() + 1) * sizeof(char), "%s", stringPath.c_str());
 }

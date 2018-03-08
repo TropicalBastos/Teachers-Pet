@@ -131,6 +131,13 @@ void MainWindow::resetButtonClicked(){
 }
 
 void MainWindow::saveFile(){
-    QUrl dest = QFileDialog::getSaveFileUrl(this, QString("Select .tp file"), QDir::homePath(), QString("(*.tp)"));
-    qDebug() << dest;
+    QUrl dest = QFileDialog::getSaveFileUrl(this, QString("Save .tp file"), QDir::homePath(), QString("(*.tp)"));
+    char* path = dest.toString().toLatin1().data();
+
+    if(std::string(path) == ""){
+        return;
+    }
+
+    BinarySerializer bs;
+    bs.write(path);
 }

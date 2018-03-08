@@ -4,8 +4,10 @@
 #define BUFSIZE 1024
 #define SEPARATOR "|"
 #define EXT ".tp"
+#define PREFIX_LEN 7
 
 #include <fstream>
+#include <regex>
 #include "student.h"
 
 /*
@@ -18,7 +20,7 @@ class BinarySerializer{
 
 public:
     BinarySerializer();
-    void write(const char* outPath);
+    void write(char* outPath);
     void read(const char* path);
 
     //Debug method
@@ -34,6 +36,7 @@ private:
     /* Reference to the app state's student list */
     std::vector<appstate::STUDENT*> &studentList;
     std::vector<vectorBufStruct> vectorBuf;
+    void validateFileType(char* path);
 
 };
 
