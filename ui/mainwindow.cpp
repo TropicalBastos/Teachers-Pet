@@ -131,6 +131,6 @@ void MainWindow::resetButtonClicked(){
 }
 
 void MainWindow::saveFile(){
-    QFileDialog* fileDialog = new QFileDialog(this, Qt::Dialog);
-    fileDialog->show();
+    QUrl dest = QFileDialog::getSaveFileUrl(this, QString("Select .tp file"), QDir::homePath(), QString("(*.tp)"));
+    qDebug() << dest;
 }

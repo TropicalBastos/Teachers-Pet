@@ -32,6 +32,7 @@ private slots:
     void on_actionQuit_triggered();
     void slotTest();
     void resetButtonClicked();
+    void saveFile();
 
 private:
     QMenu* menu;
@@ -45,7 +46,6 @@ private:
     void setMenuListeners();
     void renderAddButton();
     void renderResetButton();
-    void saveFile();
     static MainWindow* instance;
 };
 
