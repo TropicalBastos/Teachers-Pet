@@ -14,6 +14,7 @@ AddStudent::~AddStudent(){
 void AddStudent::clickListener(){
     qDebug() << "Add student clicked!";
     this->dialog = new AddStudentDialog(this);
+    this->dialog->setWindowTitle("Add Student");
     this->dialog->setFixedSize(400, 160);
     this->dialog->show();
 }
