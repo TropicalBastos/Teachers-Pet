@@ -65,6 +65,8 @@ void MainWindow::init(){
 
 void MainWindow::renderMainMenu(){
     menu = new QMenu(ui->toolButton);
+    menu->setStyleSheet("selection-color: yellow;"
+                        "width: 110;");
     newAction = new QAction(menu);
     openAction = new QAction(menu);
     saveAction = new QAction(menu);
@@ -96,6 +98,7 @@ void MainWindow::renderAddButton(){
     int x = (this->width() / 2) - (ui->pushButton->width() / 2);
     int y = this->height() - (ui->pushButton->height() * 1.75);
     ui->pushButton->move(x, y - 45);
+    ui->pushButton->setStyleSheet(BUTTON_STYLE);
 }
 
 /** Update UI based on updated data **/
@@ -114,6 +117,7 @@ std::vector<appstate::STUDENT*> MainWindow::getStudents(){
 void MainWindow::renderResetButton(){
     QPushButton* resetButton = new QPushButton("Reset Week", this);
     resetButton->show();
+    resetButton->setStyleSheet(BUTTON_STYLE);
     resetButton->move(ui->pushButton->x(), ui->pushButton->y() + 50);
     resetButton->resize(ui->pushButton->size());
     connect(resetButton, SIGNAL(clicked(bool)), this, SLOT(resetButtonClicked()));

@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #define QUIT_APPLICATION QCoreApplication::quit();
+#define BUTTON_STYLE "QPushButton:hover{ background-color: blue; color: yellow }"
 
 #include <QMainWindow>
 #include <QDebug>
