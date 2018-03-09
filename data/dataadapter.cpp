@@ -163,6 +163,7 @@ void DataAdapter::update(int size){
 }
 
 void DataAdapter::loadData(char *path){
+    newData();
     BinarySerializer bs;
     bs.read(path);
     beginInsertRows(QModelIndex(), 0, appstate::studentList.size() - 1);
@@ -173,7 +174,7 @@ void DataAdapter::loadData(char *path){
 void DataAdapter::newData(){
     int prevSize = appstate::studentList.size();
     appstate::studentList = std::vector<appstate::STUDENT*>();
-    this->removeRows(0, prevSize - 1);
-    this->removeColumns(0, COLUMN_COUNT);
+    beginRemoveRows(QModelIndex(), 0, prevSize - 1);
+    endRemoveRows();
     update(prevSize);
 }
