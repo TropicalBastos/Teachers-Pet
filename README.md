@@ -13,8 +13,9 @@ Open source student payment tracker desktop application
 </ul>
 
 ### Screeshots
-|<img width="1604" alt="screenshot1" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen.png?raw=true"> |  <img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen2.png?raw=true">|<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen3.png?raw=true">|
-<img width="1604" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen4.png?raw=true">
+<img width="33%" alt="screenshot1" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen.png?raw=true">  <img width="33%" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen2.png?raw=true">
+<img width="33%" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen3.png?raw=true">
+<img width="50%" alt="screen shot 2017-08-07 at 12 18 15 pm" src="https://github.com/TropicalBastos/Teachers-Pet/blob/master/screenshots/screen4.png?raw=true">
 
 ### Contributions
 Contributions are welcomed and encouraged. If you have a feature in mind why not fork and pull?
