@@ -42,7 +42,7 @@ void MainWindow::slotTest(){
         QPoint point = ui->toolButton->mapToGlobal(QPoint(0, 0));
         int xPos = point.x();
         int yPos = point.y() + ui->toolButton->height();
-        menu->move(xPos, yPos);
+        menu->move(xPos + 5, yPos);
         qDebug() << "Event raised by QToolButton: " << toolButton->objectName();
     }
 
