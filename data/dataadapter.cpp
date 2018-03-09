@@ -156,16 +156,24 @@ void DataAdapter::resetPaidCells(){
     update();
 }
 
-void DataAdapter::update(){
+void DataAdapter::update(int size){
     QModelIndex top = this->index(0, 0);
-    QModelIndex bottom = this->index(appstate::studentList.size(), COLUMN_COUNT);
+    QModelIndex bottom = this->index(size, COLUMN_COUNT);
     emit dataChanged(top, bottom);
 }
 
 void DataAdapter::loadData(char *path){
     BinarySerializer bs;
     bs.read(path);
-    beginInsertRows(QModelIndex(), 0, appstate::studentList.size() -1);
+    beginInsertRows(QModelIndex(), 0, appstate::studentList.size() - 1);
     endInsertRows();
     update();
+}
+
+void DataAdapter::newData(){
+    int prevSize = appstate::studentList.size();
+    appstate::studentList = std::vector<appstate::STUDENT*>();
+    this->removeRows(0, prevSize - 1);
+    this->removeColumns(0, COLUMN_COUNT);
+    update(prevSize);
 }

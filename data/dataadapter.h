@@ -38,7 +38,8 @@ public:
     void handleCheckbox(int row, int id, bool isChecked);
     void resetPaidCells();
     void loadData(char* path);
-    void update();
+    void update(int size = appstate::studentList.size());
+    void newData();
     static DataAdapter* getInstance();
 
 public slots:

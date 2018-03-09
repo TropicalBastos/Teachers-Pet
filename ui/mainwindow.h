@@ -34,6 +34,7 @@ private slots:
     void resetButtonClicked();
     void saveFile();
     void loadFile();
+    void newFile();
 
 private:
     QMenu* menu;
