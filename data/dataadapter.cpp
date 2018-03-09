@@ -99,9 +99,11 @@ void DataAdapter::add(){
 }
 
 void DataAdapter::remove(int id){
+    QModelIndexList matches = this->match(this->index(0, 0), Qt::DisplayRole, id);
+    QModelIndex matchedRow = matches.first();
+
+    beginRemoveRows(QModelIndex(), matchedRow.row(), matchedRow.row());
     int rowRemoved = appstate::removeStudent(id);
-    if(appstate::studentList.size() == 0) rowRemoved = 0;
-    beginRemoveRows(QModelIndex(), rowRemoved, rowRemoved);
     endRemoveRows();
 
     QModelIndex top = createIndex(rowRemoved, 0, Q_NULLPTR);

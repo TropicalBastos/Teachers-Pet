@@ -10,6 +10,7 @@
 
 #include <QAbstractTableModel>
 #include <QSize>
+#include <QModelIndexList>
 #include "student.h"
 #include "../ui/mainwindow.h"
 #include <QPushButton>
